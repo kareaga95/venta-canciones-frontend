@@ -1,0 +1,149 @@
+/* Navbar principal */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 2px solid #333;
+  background-color: #141414;
+  color: #fff;
+  padding: 0; /* Elimina el padding global del navbar */
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-container {
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho del navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px; /* Espaciado interno en los lados del contenido */
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0; /* Asegúrate de que no haya margen alrededor del logo */
+}
+
+
+.navbar-logo img {
+  height: 4rem;
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.title {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+  font-size: 1.3em;
+}
+
+.title:hover {
+  color: #4caf50;
+}
+
+.navbar-actions {
+  position: absolute; /* Saca el contenedor del flujo normal */
+  left: 50%; /* Lo mueve al centro horizontal de la página */
+  transform: translateX(-50%); /* Ajusta para que quede centrado respecto al viewport */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre elementos */
+}
+
+.search-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 250px;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+.btn-search {
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-search:hover {
+  background-color: #388e3c;
+}
+
+.upload-song-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 15px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-song-button:hover {
+  background-color: #388e3c;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre las acciones de usuario */
+  margin-left: auto; /* Empuja la sección a la derecha completamente */
+}
+
+.navbar-right li {
+  font-size: 1rem;
+  list-style: none;
+}
+
+.navbar-right a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.navbar-right a:hover {
+  color: #4caf50;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre las acciones del usuario */
+}
+
+.username-display {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.logout-link,
+.isArtist-link,
+.login-link {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.logout-link:hover,
+.isArtist-link:hover,
+.login-link:hover {
+  color: #4caf50;
+}

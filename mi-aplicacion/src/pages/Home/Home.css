@@ -1,0 +1,82 @@
+/* Contenedor principal */
+.home-container {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 50px; /* Asegurar espacio para el navbar si está fijo */
+  font-family: Arial, sans-serif;
+}
+
+/* Título */
+.home-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid para canciones */
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 5 columnas fijas */
+  gap: 30px; /* Espaciado entre tarjetas */
+  justify-content: center; /* Centrar las tarjetas */
+  padding: 20px;
+  max-width: 1200px; /* Limitar el ancho máximo del grid */
+  margin: 0 auto; /* Centrar el grid horizontalmente */
+}
+
+/* Tarjeta de canción */
+.song-card {
+  background-color: #282828;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  width: 200px; /* Ancho fijo para las tarjetas */
+  height: 300px; /* Alto fijo para las tarjetas */
+  display: flex;
+  flex-direction: column;
+}
+
+.song-card:hover {
+  transform: scale(1.05);
+}
+
+/* Imagen de la canción */
+.song-image {
+  width: 100%;
+  height: 60%; /* La imagen ocupa el 60% del alto total */
+  object-fit: cover; /* Asegura que la imagen mantenga proporciones */
+}
+
+/* Información de la canción */
+.song-info {
+  padding: 10px;
+  text-align: center;
+  flex-grow: 1; /* Asegura que la información ocupe el espacio restante */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.song-title {
+  font-size: 1rem !important; /* Reduce el tamaño del título */
+  font-weight: bold;
+  margin: 5px 0;
+  color: #fff;
+}
+
+
+.song-artist {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.song-price {
+  font-size: 0.9rem;
+  color: #4caf50;
+  font-weight: bold;
+  margin-top: 5px;
+}
