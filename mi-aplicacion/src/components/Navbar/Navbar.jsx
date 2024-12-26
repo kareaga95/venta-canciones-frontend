@@ -45,11 +45,11 @@ const Navbar = ({ onSearch }) => {
         }
     };
 
-    const handleLoginClick = () => {
+    const handleLogin = () => {
         navigate("/login");
     };
 
-    const handleIsArtistClick = () => {
+    const handleIsArtist = () => {
         navigate("/artists/new");
     };
 
@@ -60,8 +60,13 @@ const Navbar = ({ onSearch }) => {
     };
 
 
-    const handleUploadSongClick = () => {
+    const handleUploadSong = () => {
         navigate("/songs/new");
+    };
+
+    const handleUserPurchases = () => {
+        console.log("HANDLE USER PURCHASES ");
+        navigate("/purchases/user");
     };
 
     return (
@@ -95,7 +100,7 @@ const Navbar = ({ onSearch }) => {
                         <div className="user-actions">
                             {isArtist ? (
                                 // Si es artista, muestra el botón para subir una canción
-                                <button className="upload-song-button" onClick={handleUploadSongClick}>
+                                <button className="upload-song-button" onClick={handleUploadSong}>
                                     Subir 🚀
                                 </button>
                             ) : (
@@ -104,7 +109,7 @@ const Navbar = ({ onSearch }) => {
                                     <li>
                                         <a
                                             className="isArtist-link"
-                                            onClick={handleIsArtistClick} // Maneja el clic para convertirse en artista
+                                            onClick={handleIsArtist} // Maneja el clic para convertirse en artista
                                             style={{ cursor: "pointer" }} // Cambia el cursor para indicar que es clickeable
                                         >
                                             ¿Eres artista?
@@ -112,6 +117,15 @@ const Navbar = ({ onSearch }) => {
                                     </li>
                                 </div>
                             )}
+                            <li>
+                                <a
+                                    className="userPurchases-link"
+                                    onClick={handleUserPurchases}
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    Mis compras
+                                </a>
+                            </li>
                             <li className="username-display">{user.username}</li>
                             <li>
                                 <a
@@ -127,7 +141,7 @@ const Navbar = ({ onSearch }) => {
                         <li>
                             <a
                                 className="login-link"
-                                onClick={handleLoginClick}
+                                onClick={handleLogin}
                                 style={{ cursor: "pointer" }}
                             >
                                 Iniciar Sesión

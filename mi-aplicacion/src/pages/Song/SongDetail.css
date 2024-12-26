@@ -13,59 +13,61 @@
   gap: 20px; /* Espaciado entre la imagen y los detalles */
 }
 
-/* Contenedor de la imagen */
-.song-detail-image {
+/* Contenedor de la imagen de la canción */
+.song-detail-image-container {
   flex: 1; /* Ocupa la mitad del espacio disponible */
   max-width: 50%; /* Limita el ancho máximo al 50% */
 }
 
-.song-detail-image img {
+.song-detail-image-container img {
   width: 100%;
   height: auto; /* Mantiene la proporción de la imagen */
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Contenedor de los detalles */
-.song-detail-info {
+/* Contenedor de los detalles de la canción */
+.song-detail-info-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; /* Distribuye los elementos equitativamente */
+  justify-content: flex-start; /* Asegura que los elementos comiencen desde arriba */
   gap: 20px; /* Espaciado entre los elementos */
+  text-align: left; /* Alinea el texto a la izquierda */
 }
 
-/* Título */
-.song-title {
-  font-size: 2.5rem;
+/* Título de la canción */
+.song-detail-title {
+  font-size: 2.5rem !important;
   font-weight: bold;
   margin: 0;
-  color: #fff;
+  color: #ffaa2b;
 }
 
 /* Nombre del artista */
-.artist-name {
+.song-detail-artist-name {
   font-size: 1.8rem;
   font-weight: 600;
   margin: 0;
   color: #cccccc;
+  text-align: left; /* Alineación a la izquierda */
 }
 
-/* Género y precio */
-.song-genre,
-.song-release-date {
+/* Género y fecha de lanzamiento */
+.song-detail-genre,
+.song-detail-release-date {
   font-size: 1.2rem;
   margin: 0;
   color: #fff; /* Texto gris para el literal */
 }
 
-.song-genre span,
-.song-release-date span {
+.song-detail-genre span,
+.song-detail-release-date span {
   color: #888888; /* Texto blanco para los datos */
 }
 
-/* Botón de comprar */
-.btn-buy {
+/* Botón de compra */
+.song-detail-buy-button {
   padding: 15px 25px;
   font-size: 1.2rem;
   color: #fff;
@@ -76,7 +78,44 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn-buy:hover {
+.song-detail-buy-button:hover {
   background-color: #388e3c;
   transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el cursor */
+}
+
+/* Estilo para el reproductor de audio */
+.audio-player {
+  margin-top: 20px;
+}
+
+
+/* Contenedor del reproductor de audio */
+.audio-player {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px; /* Espaciado entre el título y el reproductor */
+}
+
+/* Título del reproductor */
+.audio-player h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Estilo para el elemento audio */
+.audio-player audio {
+  width: 100%; /* Asegura que el reproductor ocupe todo el ancho disponible */
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para un mejor efecto visual */
+  padding: 10px 0;
+}
+
+/* Controlador de audio: es opcional, pero mejora la visibilidad del reproductor */
+.audio-player audio::-webkit-media-controls {
+  background-color: #1e1e1e; /* Asegura que los controles también tengan el fondo oscuro */
 }

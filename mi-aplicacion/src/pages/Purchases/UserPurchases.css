@@ -1,0 +1,85 @@
+.purchases-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1c1c1c; /* Fondo oscuro para el contenedor */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #fff; /* Texto blanco para contraste */
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff; /* Asegúrate de que el título sea visible */
+}
+
+.purchases-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.purchase-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #2d2d2d; /* Fondo oscuro para cada item */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.purchase-item:hover {
+    transform: translateY(-5px);
+    background-color: #3a3a3a; /* Fondo más claro al pasar el ratón */
+}
+
+.purchase-image {
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.purchase-image img {
+    width: 60px; /* Mantener el tamaño reducido */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #fff; /* Borde blanco alrededor de la imagen */
+}
+
+.purchase-details {
+    flex: 1;
+}
+
+.purchase-details h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff; /* Texto blanco para los detalles */
+}
+
+.purchase-details p {
+    margin: 5px 0;
+    color: #ccc; /* Color más suave para el texto */
+}
+
+.download-button {
+    padding: 10px 20px;
+    background-color: #5469d4; /* Azul brillante para el botón */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.download-button:hover {
+    background-color: #4353b3; /* Cambia el color del botón cuando se pasa el ratón */
+}
+
+.download-button:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}

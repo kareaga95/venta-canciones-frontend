@@ -32,7 +32,6 @@ const SongDetail = () => {
     fetchSong();
   }, [id]);
 
-
   useEffect(() => {
     if (song && song.artist_id) {
       const fetchArtist = async () => {
@@ -52,7 +51,6 @@ const SongDetail = () => {
     setShowPayment(true); // Mostrar el formulario de pago
   };
 
-
   if (!song) {
     return <p>Cargando los detalles de la canción...</p>;
   }
@@ -60,22 +58,34 @@ const SongDetail = () => {
   return (
     <div className="song-detail-container">
       {/* Imagen de la canción */}
-      <div className="song-detail-image">
+      <div className="song-detail-image-container">
         <img src={`${localhost}${song.cover_image}`} alt={song.title} />
       </div>
 
       {/* Detalles de la canción */}
-      <div className="song-detail-info">
-        <h1 className="song-title">{song.title}</h1>
-        <h2 className="artist-name">{artist ? artist.name : "Cargando artista..."}</h2>
-        <p className="song-release-date">
+      <div className="song-detail-info-container">
+        <h1 className="song-detail-title">{song.title}</h1>
+        <h2 className="song-detail-artist-name">{artist ? artist.name : "Cargando artista..."}</h2>
+        <p className="song-detail-release-date">
           <span>Fecha de lanzamiento:</span> {song.release_date}
         </p>
-        <p className="song-genre">
+        <p className="song-detail-genre">
           <span>Género:</span> {song.genre}
         </p>
-        <button className="btn-buy" onClick={handleBuyClick}>Comprar {song.price} €</button>
-        {showPayment && <Payment price={song.price} />}
+
+        {/* Reproductor de audio */}
+        {song.audio_file_path && (
+          <div className="audio-player">
+          <h3>Escuchar Demo:</h3>
+          <audio controls controlsList="nodownload">
+            <source src={`${localhost}${song.audio_file_path}`} type="audio/mpeg" />
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+        </div>
+        )}
+
+        <button className="song-detail-buy-button" onClick={handleBuyClick}>Comprar {song.price} €</button>
+        {showPayment && <Payment price={song.price} id={song.id} />}
       </div>
     </div>
   );

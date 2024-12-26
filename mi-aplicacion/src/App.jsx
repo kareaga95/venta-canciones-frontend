@@ -7,6 +7,8 @@ import NewArtist from "./pages/NewArtist/NewArtist";
 import Footer from "./components/FooterComponents/Footer";
 import SongDetail from "./pages/Song/SongDetail";
 import UploadSong from "./pages/Song/UploadSong";
+import Register from "./pages/Register/Register";
+import UserPurchases from "./pages/Purchases/UserPurchases";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -25,7 +27,7 @@ function App() {
       setUser(JSON.parse(savedUser));
     }
   }, []);
-
+  console.log("User ID:", user?.id); // Asegúrate de que user.id sea correcto
   return (
     <div>
       <p>{user && user.username} soy Mikel</p>
@@ -34,9 +36,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/artists/new" element={<NewArtist user={user} />} />
           <Route path="/songs/:id" element={<SongDetail />} />
           <Route path="/songs/new" element={<UploadSong />} />
+          <Route path="/purchases/user" element={<UserPurchases userId={user?.id} />} />
         </Routes>
         <Footer />
       </Router>

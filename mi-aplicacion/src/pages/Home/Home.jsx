@@ -35,12 +35,12 @@ const Home = () => {
   return (
     <div>
       <Navbar onSearch={handleSearch} /> {/* Pasar función de búsqueda */}
-      <div className="home-container">
-        <h1 className="home-title">Nuevos Lanzamientos</h1>
-        <div className="songs-grid">
+      <div className="home-page-container">
+        <h1 className="home-page-title">Nuevos Lanzamientos</h1>
+        <div className="songs-grid-container">
           {songs.map((song) => (
             <div
-              className="song-card"
+              className="song-card-item"
               key={song.id}
               onClick={() => handleClick(song)}
               style={{ cursor: "pointer" }} // Pasar el objeto completo al hacer clic
@@ -48,12 +48,12 @@ const Home = () => {
               <img
                 src={`${localhost}${song.cover_image}`}
                 alt={song.title}
-                className="song-image"
+                className="song-card-image"
               />
-              <div className="song-info">
-                <p className="song-title">{song.title}</p>
-                <p className="song-artist">{song.artist.name}</p>
-                <p className="song-price">{`€${song.price}`}</p>
+              <div className="song-card-info">
+                <p className="song-card-title">{song.title}</p>
+                <p className="song-card-artist">{song.artist.name}</p>
+                <p className="song-card-price">{`€${song.price}`}</p>
               </div>
             </div>
           ))}

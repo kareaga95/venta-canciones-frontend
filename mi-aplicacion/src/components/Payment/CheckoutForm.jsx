@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-
-const CheckoutForm = ({ price }) => {
+import axios from "axios";
+import purchaseController from "../../utils/api/purchaseController";
+const CheckoutForm = ({ price, id }) => {
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -35,12 +37,21 @@ const CheckoutForm = ({ price }) => {
                     },
                 },
             });
-            
+
             if (result.error) {
                 alert("Error en el pago: " + result.error.message);
             } else if (result.paymentIntent.status === "succeeded") {
                 alert("¡Pago realizado con éxito!");
-                navigate("/purchases/new")
+                console.log("ID de la canción:", id);
+                const songId = id; // Asegúrate de tener este valor disponible
+                const user = localStorage.getItem("user"); // Obtén el userId desde el contexto o la sesión
+                console.log("USUARIO", user);
+                if (user) {
+                    const userId = JSON.parse(user).id; // Suponiendo que el user guardado es un objeto JSON
+                    const purchaseResponse = await purchaseController.createPurchase(userId, songId);
+                    console.log("Respuesta de la compra:", purchaseResponse);
+                }
+                navigate("/purchases/user"); // Redirigir a la página de inicio
             }
         } catch (error) {
             console.error("Error procesando el pago:", error);
