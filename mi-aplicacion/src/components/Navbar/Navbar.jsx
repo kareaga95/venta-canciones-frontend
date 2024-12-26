@@ -8,6 +8,7 @@ const Navbar = ({ onSearch }) => {
     const [user, setUser] = useState(null);
     const [isArtist, setIsArtist] = useState(null);
     const navigate = useNavigate();
+
     useEffect(() => {
         // Función para sincronizar el usuario desde localStorage
         const syncUser = () => {
@@ -84,26 +85,32 @@ const Navbar = ({ onSearch }) => {
                     <button className="btn-search" onClick={handleSearch}>
                         Buscar
                     </button>
-                    
+
                 </div>
 
                 {/* Acciones a la derecha */}
                 <ul className="navbar-right">
-                <button className="upload-song-button" onClick={handleUploadSongClick}>
-                        Subir 🚀
-                    </button>
+
                     {user ? (
                         <div className="user-actions">
-                            {isArtist ? null : (
-                                <li>
-                                    <a
-                                        className="isArtist-link"
-                                        onClick={handleIsArtistClick}
-                                        style={{ cursor: "pointer" }}
-                                    >
-                                        ¿Eres artista?
-                                    </a>
-                                </li>
+                            {isArtist ? (
+                                // Si es artista, muestra el botón para subir una canción
+                                <button className="upload-song-button" onClick={handleUploadSongClick}>
+                                    Subir 🚀
+                                </button>
+                            ) : (
+                                // Si no es artista, muestra un enlace que permite convertirse en artista
+                                <div>
+                                    <li>
+                                        <a
+                                            className="isArtist-link"
+                                            onClick={handleIsArtistClick} // Maneja el clic para convertirse en artista
+                                            style={{ cursor: "pointer" }} // Cambia el cursor para indicar que es clickeable
+                                        >
+                                            ¿Eres artista?
+                                        </a>
+                                    </li>
+                                </div>
                             )}
                             <li className="username-display">{user.username}</li>
                             <li>

@@ -1,0 +1,83 @@
+/* Contenedor principal para la página de pago */
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+.payment-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #32325d;
+    margin-bottom: 30px;
+}
+
+/* Estilo para el formulario de pago */
+.checkout-form {
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-element-container {
+    margin-bottom: 25px;
+}
+
+.pay-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #5469d4;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pay-button:hover {
+    background-color: #4353b3;
+}
+
+.pay-button:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.card-element {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.card-element:focus {
+    border-color: #5469d4;
+}
+
+.card-element--invalid {
+    border-color: #fa755a;
+}
+
+.card-element-container input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.card-element-container input:focus {
+    border-color: #5469d4;
+}

@@ -9,11 +9,16 @@ async function fetchData(pathName, method = "GET", body = null) {
         const options = {
             method,
             headers: {
-                "Content-Type": "application/json",
-                accept: "application/json",
-                Authorization: `Bearer ${token || ""}`,
-            },
-            body: body ? JSON.stringify(body) : null,
+                // Solo agrega encabezados adicionales si no es FormData
+                ...(body instanceof FormData
+                    ? { Authorization: `Bearer ${token || ""}` }
+                    : {
+                          "Content-Type": "application/json",
+                          accept: "application/json",
+                          Authorization: `Bearer ${token || ""}`,
+                      }),
+                },
+            body: body instanceof FormData ? body : body ? JSON.stringify(body) : null,
         };
 
         const response = await fetch(url.toString(), options);
@@ -28,6 +33,7 @@ async function fetchData(pathName, method = "GET", body = null) {
         throw error;
     }
 }
+
 
 /**
  * Obtiene canciones filtradas o todas las canciones si no se especifican filtros.
@@ -71,7 +77,8 @@ export async function getSongById(songId) {
  */
 export async function createSong(songData) {
     try {
-        return await fetchData("/songs", "POST", songData);
+        console.log("songData:", songData);
+        return await fetchData("/songs/new", "POST", songData);
     } catch (error) {
         console.error("Error al crear canción:", error);
         throw error;

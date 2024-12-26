@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import NewArtist from "./pages/NewArtist/NewArtist";
 import Footer from "./components/FooterComponents/Footer";
 import SongDetail from "./pages/Song/SongDetail";
+import UploadSong from "./pages/Song/UploadSong";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/artists/new" element={<NewArtist user={user} />} />
           <Route path="/songs/:id" element={<SongDetail />} />
+          <Route path="/songs/new" element={<UploadSong />} />
         </Routes>
         <Footer />
       </Router>

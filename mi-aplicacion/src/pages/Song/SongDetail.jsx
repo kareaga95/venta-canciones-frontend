@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import "./SongDetail.css";
 import songController from "../../utils/api/songController";
 import artistController from "../../utils/api/artistController";
+import Payment from "../../components/Payment/Payment";
 
 const SongDetail = () => {
   const { id } = useParams();
   const [song, setSong] = useState(null);
   const [artist, setArtist] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
   const localhost = "http://localhost:3000/";
 
   useEffect(() => {
@@ -46,6 +48,9 @@ const SongDetail = () => {
     }
   }, [song]);
 
+  const handleBuyClick = () => {
+    setShowPayment(true); // Mostrar el formulario de pago
+  };
 
 
   if (!song) {
@@ -69,7 +74,8 @@ const SongDetail = () => {
         <p className="song-genre">
           <span>Género:</span> {song.genre}
         </p>
-        <button className="btn-save">Comprar {song.price} €</button>
+        <button className="btn-buy" onClick={handleBuyClick}>Comprar {song.price} €</button>
+        {showPayment && <Payment price={song.price} />}
       </div>
     </div>
   );

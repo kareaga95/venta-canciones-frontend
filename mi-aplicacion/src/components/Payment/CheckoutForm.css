@@ -1,0 +1,79 @@
+/* Estilos globales para la página de pago */
+.checkout-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-element-container {
+    margin-bottom: 20px;
+}
+
+.pay-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #5469d4;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pay-button:hover {
+    background-color: #4353b3;
+}
+
+.pay-button:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.card-element {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.card-element:focus {
+    border-color: #5469d4;
+}
+
+.card-element--invalid {
+    border-color: #fa755a;
+}
+
+/* Estilo para el texto de la tarjeta */
+.CardElement {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.CardElement:focus {
+    border-color: #32325d;
+}
+
+.card-element-container input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.card-element-container input:focus {
+    border-color: #5469d4;
+}
