@@ -38,8 +38,8 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/artists/new" element={<NewArtist user={user} />} />
-          <Route path="/songs/:id" element={<SongDetail />} />
-          <Route path="/songs/new" element={<UploadSong />} />
+          <Route path="/songs/:id" element={<SongDetail user={user}/>} />
+          <Route path="/songs/new" element={<UploadSong user={user}/>} />
           <Route path="/purchases/user" element={<UserPurchases userId={user?.id} />} />
         </Routes>
         <Footer />

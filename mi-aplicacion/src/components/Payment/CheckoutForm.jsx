@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
-import purchaseController from "../../utils/api/purchaseController";
+import purchaseController from "../../utils/api/purchaseController"; 
+
 const CheckoutForm = ({ price, id }) => {
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (userData) {
+            setUser(JSON.parse(userData));
+        }
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -20,20 +28,21 @@ const CheckoutForm = ({ price, id }) => {
         const cardElement = elements.getElement(CardElement);
 
         try {
+            // Llamada al backend para crear un PaymentIntent
             const response = await fetch("http://localhost:3000/api/payment/intent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: price * 100 }), // Stripe usa centavos
             });
 
-
             const { clientSecret } = await response.json();
-            console.log("ClientSecret recibido:", clientSecret);
+
+            // Confirmar el pago con el clientSecret
             const result = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
                     billing_details: {
-                        name: "Cliente Ejemplo",
+                        name: user ? user.username : "Cliente Anónimo",
                     },
                 },
             });
@@ -42,19 +51,23 @@ const CheckoutForm = ({ price, id }) => {
                 alert("Error en el pago: " + result.error.message);
             } else if (result.paymentIntent.status === "succeeded") {
                 alert("¡Pago realizado con éxito!");
-                console.log("ID de la canción:", id);
-                const songId = id; // Asegúrate de tener este valor disponible
-                const user = localStorage.getItem("user"); // Obtén el userId desde el contexto o la sesión
-                console.log("USUARIO", user);
+
+                // Si el pago es exitoso, registrar la compra
                 if (user) {
-                    const userId = JSON.parse(user).id; // Suponiendo que el user guardado es un objeto JSON
+                    const userId = user.id; // El id del usuario
+                    const songId = id; // El id de la canción
                     const purchaseResponse = await purchaseController.createPurchase(userId, songId);
-                    console.log("Respuesta de la compra:", purchaseResponse);
+                    console.log("Compra registrada:", purchaseResponse);
+
+                    // Redirigir a la página de compras del usuario
+                    navigate("/purchases/user");
+                } else {
+                    alert("Usuario no autenticado");
                 }
-                navigate("/purchases/user"); // Redirigir a la página de inicio
             }
         } catch (error) {
             console.error("Error procesando el pago:", error);
+            alert("Hubo un error al procesar el pago. Intenta nuevamente.");
         }
     };
 
