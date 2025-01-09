@@ -42,11 +42,11 @@ h2 {
 }
 
 .purchase-image img {
-    width: 60px; /* Mantener el tamaño reducido */
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid #fff; /* Borde blanco alrededor de la imagen */
+    width: 80px; /* Imagen más grande */
+    height: 80px;
+    object-fit: cover; /* Mantener proporción sin deformar */
+    border-radius: 8px; /* Bordes redondeados */
+    border: none; /* Sin borde */
 }
 
 .purchase-details {

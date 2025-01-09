@@ -18,10 +18,8 @@ const UserPurchases = ({ userId }) => {
                 // Obtener detalles de cada canción comprada usando song_id y almacenarlo directamente en `song` de cada compra
                 const updatedPurchases = await Promise.all(
                     userPurchases.map(async (purchase) => {
-                        
                         const song = await songController.getSongById(purchase.song_id);
-                        const artist = await artistController.getByArtistId(purchase.song.artist_id);
-                        console.log("artist ", artist);
+                        const artist = await artistController.getByArtistId(song.artist_id);
                         return { ...purchase, song, artist }; // Almacena directamente el objeto de la canción en `song`
                     })
                 );
@@ -37,10 +35,8 @@ const UserPurchases = ({ userId }) => {
     }, [userId]);
 
     const handleDownload = (song) => {
-        console.log("Song song song ", song)
         songController.downloadSong(song); // Llama a la función para descargar la canción
         console.log("Descargando canción con ID: ", song.id);
-        // Aquí puedes hacer una solicitud para descargar la canción desde el backend.
     };
 
     if (loading) {
@@ -50,7 +46,16 @@ const UserPurchases = ({ userId }) => {
     if (error) {
         return <div>{error}</div>;
     }
-console.log(purchases);
+
+    // Formatear la fecha a dd/mm/yyyy
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses van de 0 a 11
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
     return (
         <div className="purchases-container">
             <h2>Mis Compras</h2>
@@ -63,7 +68,7 @@ console.log(purchases);
                         <div className="purchase-details">
                             <h3>{purchase.song.title}</h3>
                             <p>{purchase.artist.name}</p>
-                            <p>Fecha compra: {purchase.purchase_date}</p>
+                            <p>Fecha de compra: {formatDate(purchase.purchase_date)}</p>
                             <button
                                 className="download-button"
                                 onClick={() => handleDownload(purchase)}

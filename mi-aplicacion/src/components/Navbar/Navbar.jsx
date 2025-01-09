@@ -7,33 +7,28 @@ const Navbar = ({ onSearch }) => {
     const [searchValue, setSearchValue] = useState("");
     const [user, setUser] = useState(null);
     const [isArtist, setIsArtist] = useState(null);
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Función para sincronizar el usuario desde localStorage
         const syncUser = () => {
             const userData = localStorage.getItem("user");
             setUser(userData ? JSON.parse(userData) : null);
         };
         syncUser();
-        // Escuchar cambios en localStorage
         window.addEventListener("storage", syncUser);
-        // Limpiar el listener al desmontar el componente
         return () => {
             window.removeEventListener("storage", syncUser);
         };
     }, []);
 
     useEffect(() => {
-        // Función para sincronizar el artista desde localStorage
         const syncArtist = () => {
             const artistData = localStorage.getItem("artist");
             setIsArtist(artistData ? JSON.parse(artistData) : null);
         };
         syncArtist();
-        // Escuchar cambios en localStorage
         window.addEventListener("storage", syncArtist);
-        // Limpiar el listener al desmontar el componente
         return () => {
             window.removeEventListener("storage", syncArtist);
         };
@@ -56,29 +51,59 @@ const Navbar = ({ onSearch }) => {
     const handleLogout = () => {
         authController.logout();
         setUser(null);
+        setIsDropdownVisible(false);
         navigate("/");
     };
-
 
     const handleUploadSong = () => {
         navigate("/songs/new");
     };
 
     const handleUserPurchases = () => {
-        console.log("HANDLE USER PURCHASES ");
         navigate("/purchases/user");
+    };
+
+    const handleMySongs = () => {
+        navigate("/songs/artist");
+    };
+
+    const handleToggleDropdown = (event) => {
+        event.stopPropagation();
+        setIsDropdownVisible((prev) => !prev);
+    };
+
+    const handleCloseDropdown = () => {
+        setIsDropdownVisible(false);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest(".username-container")) {
+                handleCloseDropdown();
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+    const handleUnsubscribe = () => {
+        alert("Solicitud para darse de baja enviada.");
+    };
+
+    const handleCustomerService = () => {
+        alert("Redirigiendo a Atención al Cliente...");
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                {/* Logo a la izquierda */}
                 <div className="navbar-logo">
                     <img src="/images/logo.png" alt="Logo" />
                     <a href="/" className="title">Song Launcher</a>
                 </div>
 
-                {/* Input y botones en el centro */}
                 <div className="navbar-actions">
                     <input
                         className="search-input"
@@ -90,51 +115,35 @@ const Navbar = ({ onSearch }) => {
                     <button className="btn-search" onClick={handleSearch}>
                         Buscar
                     </button>
-
                 </div>
 
-                {/* Acciones a la derecha */}
                 <ul className="navbar-right">
-
                     {user ? (
                         <div className="user-actions">
-                            {isArtist ? (
-                                // Si es artista, muestra el botón para subir una canción
+                            {isArtist && (
                                 <button className="upload-song-button" onClick={handleUploadSong}>
                                     Subir 🚀
                                 </button>
-                            ) : (
-                                // Si no es artista, muestra un enlace que permite convertirse en artista
-                                <div>
-                                    <li>
-                                        <a
-                                            className="isArtist-link"
-                                            onClick={handleIsArtist} // Maneja el clic para convertirse en artista
-                                            style={{ cursor: "pointer" }} // Cambia el cursor para indicar que es clickeable
-                                        >
-                                            ¿Eres artista?
-                                        </a>
-                                    </li>
-                                </div>
                             )}
-                            <li>
-                                <a
-                                    className="userPurchases-link"
-                                    onClick={handleUserPurchases}
+                            <li className="username-container">
+                                <span
+                                    className="username-display"
+                                    onClick={handleToggleDropdown}
                                     style={{ cursor: "pointer" }}
                                 >
-                                    Mis compras
-                                </a>
-                            </li>
-                            <li className="username-display">{user.username}</li>
-                            <li>
-                                <a
-                                    className="logout-link"
-                                    onClick={handleLogout}
-                                    style={{ cursor: "pointer" }}
-                                >
-                                    Cerrar Sesión
-                                </a>
+                                    {user.username}
+                                </span>
+                                {isDropdownVisible && (
+                                    <div className="dropdown-menu">
+                                        <ul>
+                                            <li onClick={handleMySongs}>Mis canciones</li>
+                                            <li onClick={handleUserPurchases}>Mis compras</li> {/* Mis compras dentro del menú */}
+                                            <li onClick={handleUnsubscribe}>Darse de baja</li>
+                                            <li onClick={handleCustomerService}>Atención al cliente</li>
+                                            <li onClick={handleLogout}>Cerrar Sesión</li>
+                                        </ul>
+                                    </div>
+                                )}
                             </li>
                         </div>
                     ) : (

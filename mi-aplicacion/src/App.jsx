@@ -9,6 +9,7 @@ import SongDetail from "./pages/Song/SongDetail";
 import UploadSong from "./pages/Song/UploadSong";
 import Register from "./pages/Register/Register";
 import UserPurchases from "./pages/Purchases/UserPurchases";
+import MySongs from "./pages/MySongs/MySongs";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -32,15 +33,16 @@ function App() {
     <div>
       <p>{user && user.username} soy Mikel</p>
       <Router>
-        <Navbar user={user} />
+        <Navbar user={user} onLogout={() => setUser(null)} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/artists/new" element={<NewArtist user={user} />} />
-          <Route path="/songs/:id" element={<SongDetail user={user}/>} />
-          <Route path="/songs/new" element={<UploadSong user={user}/>} />
+          <Route path="/songs/:id" element={<SongDetail user={user} />} />
+          <Route path="/songs/new" element={<UploadSong user={user} />} />
           <Route path="/purchases/user" element={<UserPurchases userId={user?.id} />} />
+          <Route path="/songs/artist" element={<MySongs userId={user?.id}/>} />
         </Routes>
         <Footer />
       </Router>

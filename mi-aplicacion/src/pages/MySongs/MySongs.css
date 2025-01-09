@@ -1,0 +1,175 @@
+.my-songs-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #1c1c1c; /* Fondo oscuro para el contenedor */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #fff; /* Texto blanco para contraste */
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fff; /* Asegúrate de que el título sea visible */
+}
+
+.my-songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.my-song-item {
+  display: flex;
+  align-items: center;
+  padding: 20px; /* Espaciado interno */
+  background-color: #2d2d2d; /* Fondo oscuro para cada item */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.my-song-item:hover {
+  transform: translateY(-5px);
+  background-color: #3a3a3a; /* Fondo más claro al pasar el ratón */
+}
+
+.my-song-image {
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.my-song-image img {
+  width: 100px; /* Imagen más grande */
+  height: 100px;
+  object-fit: cover; /* Para mantener la proporción de la imagen */
+  border-radius: 8px; /* Bordes redondeados */
+  border: none; /* Sin borde */
+}
+
+.my-song-details {
+  flex: 1;
+}
+
+.my-song-details h3 {
+  margin: 0;
+  font-size: 20px; /* Título más grande */
+  color: #fff; /* Texto blanco para los detalles */
+}
+
+.my-song-details p {
+  margin: 5px 0;
+  color: #ccc; /* Color más suave para el texto */
+}
+
+.my-song-buttons {
+  display: flex;
+  gap: 10px; /* Separación entre los botones */
+}
+
+.my-edit-button,
+.my-delete-button {
+  padding: 12px 24px; /* Botones más grandes */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* Texto de los botones más grande */
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.my-edit-button {
+  background-color: #5469d4; /* Azul brillante para el botón de editar */
+}
+
+.my-edit-button:hover {
+  background-color: #4353b3; /* Azul más oscuro al pasar el ratón */
+}
+
+.my-delete-button {
+  background-color: #dc3545; /* Rojo para el botón de eliminar */
+}
+
+.my-delete-button:hover {
+  background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+.my-delete-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+
+/* Estilo del modal */
+.modal-overlay-delete-confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-delete-confirm {
+  background-color: #282828;
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal-delete-confirm h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+}
+
+.modal-delete-confirm-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.cancel-button,
+.confirm-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #fff;
+  transition: background-color 0.3s;
+  margin: 0 10px; /* Separación horizontal entre los botones */
+}
+
+.cancel-button {
+  background-color: #d64c4c;
+}
+
+.cancel-button:hover {
+  background-color: #d64c4c;
+}
+
+.confirm-button {
+  background-color: #4caf50;
+}
+
+.confirm-button:hover {
+  background-color: #4caf50;
+}
+
+.close-button{
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}

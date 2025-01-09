@@ -29,7 +29,7 @@ async function fetchPurchase(pathName, method = "GET", body = null) {
 /**
  * Función para obtener todas las compras de un usuario
  */
-export async function getAllPurchasesByUserId(userId) {
+export async function getAllPurchasesByUserId() {
     try {
         return await fetchPurchase(`/purchases/user`, "GET");
     } catch (error) {

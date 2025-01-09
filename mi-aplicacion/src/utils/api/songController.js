@@ -145,6 +145,22 @@ export async function updateSong(songId, songData) {
 }
 
 /**
+ * Obtiene todas las canciones de un artista por su ID.
+ * 
+ * @param {number|string} artistId - ID del artista.
+ * @returns {Promise<Array>} - Lista de canciones del artista.
+ */
+export async function getSongsByArtistId(artistId) {
+    try {
+        console.log("SI LLEGA", artistId);
+        return await fetchData(`/songs/artist/${artistId}`, "GET");
+    } catch (error) {
+        console.error("Error obteniendo las canciones del artista:", error);
+        throw error;
+    }
+}
+
+/**
  * Elimina una canción por su ID.
  * 
  * @param {number|string} songId - ID de la canción a eliminar.
@@ -152,7 +168,8 @@ export async function updateSong(songId, songData) {
  */
 export async function deleteSong(songId) {
     try {
-        return await fetchData(`/songs/${songId}`, "DELETE");
+        console.log("ENTRA EN ELIMINAR");
+        return await fetchData(`/songs/${songId}/delete`, "DELETE");
     } catch (error) {
         console.error("Error al eliminar canción:", error);
         throw error;
@@ -165,7 +182,8 @@ export const functions = {
     updateSong,
     deleteSong,
     getSongById,
-    downloadSong
+    downloadSong,
+    getSongsByArtistId
 };
 
 export default functions;

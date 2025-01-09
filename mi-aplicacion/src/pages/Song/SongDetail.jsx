@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./SongDetail.css";
 import songController from "../../utils/api/songController";
 import artistController from "../../utils/api/artistController";
@@ -10,6 +10,8 @@ const SongDetail = () => {
   const [song, setSong] = useState(null);
   const [artist, setArtist] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
+  const [user, setUser] = useState(null); // Estado para verificar si el usuario está autenticado
+  const [warningMessage, setWarningMessage] = useState(""); // Estado para el mensaje de advertencia
   const localhost = "http://localhost:3000/";
 
   useEffect(() => {
@@ -17,7 +19,6 @@ const SongDetail = () => {
       try {
         const fetchedSong = await songController.getSongById(id);
 
-        // Formatear la fecha directamente desde fetchedSong
         if (fetchedSong.release_date) {
           const formattedDate = new Date(fetchedSong.release_date).toISOString().split('T')[0];
           fetchedSong.release_date = formattedDate;
@@ -47,8 +48,19 @@ const SongDetail = () => {
     }
   }, [song]);
 
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
   const handleBuyClick = () => {
-    setShowPayment(true); // Mostrar el formulario de pago
+    if (!user) {
+      setWarningMessage("Para realizar una compra, debes iniciar sesión.");
+      return;
+    }
+    setShowPayment(true);
   };
 
   if (!song) {
@@ -76,15 +88,23 @@ const SongDetail = () => {
         {/* Reproductor de audio */}
         {song.audio_file_path && (
           <div className="audio-player">
-          <h3>Escuchar Demo:</h3>
-          <audio controls controlsList="nodownload">
-            <source src={`${localhost}${song.audio_file_path}`} type="audio/mpeg" />
-            Tu navegador no soporta el elemento de audio.
-          </audio>
-        </div>
+            <h3>Escuchar Demo:</h3>
+            <audio controls controlsList="nodownload">
+              <source src={`${localhost}${song.audio_file_path}`} type="audio/mpeg" />
+              Tu navegador no soporta el elemento de audio.
+            </audio>
+          </div>
         )}
 
-        <button className="song-detail-buy-button" onClick={handleBuyClick}>Comprar {song.price} €</button>
+        {/* Botón de compra */}
+        <button className="song-detail-buy-button" onClick={handleBuyClick}>
+          Comprar {song.price} €
+        </button>
+
+        {/* Mostrar mensaje de advertencia si el usuario no ha iniciado sesión */}
+        {warningMessage && <p className="warning-message">{warningMessage}</p>}
+
+        {/* Formulario de pago */}
         {showPayment && <Payment price={song.price} id={song.id} />}
       </div>
     </div>
