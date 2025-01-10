@@ -9,7 +9,6 @@ async function fetchData(pathName, method = "GET", body = null) {
         const options = {
             method,
             headers: {
-                // Solo agrega encabezados adicionales si no es FormData
                 ...(body instanceof FormData
                     ? { Authorization: `Bearer ${token || ""}` }
                     : {
@@ -78,8 +77,6 @@ export async function getSongById(songId) {
 export async function downloadSong(purchase) {
     try {
         console.log("SONG ID  ", purchase.song.id);
-
-        // Realizamos la solicitud GET para obtener el archivo de la canción
         const response = await fetch(`${BASE_URL}/songs/${purchase.song.id}/download`, {
             method: "GET",
             headers: {
@@ -87,27 +84,24 @@ export async function downloadSong(purchase) {
             },
         });
 
-        // Verifica si la respuesta es exitosa
         if (!response.ok) {
             throw new Error("Error al intentar descargar la canción");
         }
 
-        // Convierte la respuesta a un Blob (archivo binario)
+        
         const blob = await response.blob();
 
-        // Crea un enlace de descarga para el archivo
+       
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `${purchase.artist.name}-${purchase.song.title}.mp3`;  // Puedes ajustar el nombre del archivo según sea necesario
-        link.click();  // Simula un clic para iniciar la descarga
-
-        // Liberar el objeto URL después de la descarga
+        link.download = `${purchase.artist.name}-${purchase.song.title}.mp3`;
+        link.click();
         window.URL.revokeObjectURL(url);
 
     } catch (error) {
         console.error("Error al intentar descargar la canción:", error);
-        throw error; // Propaga el error si algo sale mal
+        throw error;
     }
 }
 

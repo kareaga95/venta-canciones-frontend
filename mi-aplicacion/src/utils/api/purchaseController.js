@@ -7,7 +7,7 @@ async function fetchPurchase(pathName, method = "GET", body = null) {
             method,
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Agrega el token si es necesario
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
             },
             body: body ? JSON.stringify(body) : null,
         };
@@ -26,9 +26,6 @@ async function fetchPurchase(pathName, method = "GET", body = null) {
     }
 }
 
-/**
- * Función para obtener todas las compras de un usuario
- */
 export async function getAllPurchasesByUserId() {
     try {
         return await fetchPurchase(`/purchases/user`, "GET");
@@ -38,9 +35,6 @@ export async function getAllPurchasesByUserId() {
     }
 }
 
-/**
- * Función para crear una nueva compra
- */
 export async function createPurchase(userId, songId) {
     try {
         console.log("Creando compra...", userId, songId);

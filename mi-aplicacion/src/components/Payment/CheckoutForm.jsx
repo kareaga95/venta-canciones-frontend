@@ -20,7 +20,6 @@ const CheckoutForm = ({ price, id }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
     
-        // Verificar si el usuario ha iniciado sesión
         if (!user) {
             alert("Debes iniciar sesión para realizar una compra.");
             return;
@@ -34,16 +33,14 @@ const CheckoutForm = ({ price, id }) => {
         const cardElement = elements.getElement(CardElement);
     
         try {
-            // Llamada al backend para crear un PaymentIntent
             const response = await fetch("http://localhost:3000/api/payment/intent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: price * 100 }), // Stripe usa centavos
+                body: JSON.stringify({ amount: price * 100 }),
             });
     
             const { clientSecret } = await response.json();
     
-            // Confirmar el pago con el clientSecret
             const result = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
@@ -57,14 +54,12 @@ const CheckoutForm = ({ price, id }) => {
                 alert("Error en el pago: " + result.error.message);
             } else if (result.paymentIntent.status === "succeeded") {
                 alert("¡Pago realizado con éxito!");
-    
-                // Registrar la compra en el sistema
-                const userId = user.id; // El id del usuario
-                const songId = id; // El id de la canción
+
+                const userId = user.id;
+                const songId = id;
                 const purchaseResponse = await purchaseController.createPurchase(userId, songId);
                 console.log("Compra registrada:", purchaseResponse);
     
-                // Redirigir a la página de compras del usuario
                 navigate("/purchases/user");
             }
         } catch (error) {

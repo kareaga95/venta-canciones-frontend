@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import songController from '../../utils/api/songController';
-import './EditSong.css'; // Importar el archivo de estilos
+import './EditSong.css';
 
 const EditSong = () => {
     const { songId } = useParams();
@@ -13,7 +13,7 @@ const EditSong = () => {
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showSuccessModal, setShowSuccessModal] = useState(false); // Controla la visibilidad del modal de éxito
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     useEffect(() => {
         const fetchSong = async () => {
@@ -39,7 +39,7 @@ const EditSong = () => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: name === "price" ? parseFloat(value) : value, // Convertir "price" a número
+            [name]: name === "price" ? parseFloat(value) : value,
         });
     };
 
@@ -47,7 +47,7 @@ const EditSong = () => {
         e.preventDefault();
         try {
             await songController.updateSong(songId, formData);
-            setShowSuccessModal(true); // Mostrar el modal de éxito
+            setShowSuccessModal(true);
         } catch (error) {
             console.error('Error al actualizar la canción:', error);
             alert('Error al actualizar la canción. Intenta de nuevo.');
@@ -56,7 +56,7 @@ const EditSong = () => {
 
     const handleCloseModal = () => {
         setShowSuccessModal(false);
-        navigate('/songs/artist'); // Redirige a la lista de canciones
+        navigate('/songs/artist');
     };
 
     if (loading) {
@@ -117,7 +117,6 @@ const EditSong = () => {
                 </div>
             </form>
 
-            {/* Modal de éxito */}
             {showSuccessModal && (
                 <div className="edit-song-modal">
                     <div className="edit-song-modal-content">

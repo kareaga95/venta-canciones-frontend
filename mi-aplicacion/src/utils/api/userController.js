@@ -10,7 +10,7 @@ async function fetchUser(pathName, method = "GET", body = null) {
             method,
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Agrega el token si es necesario
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
             },
             body: body ? JSON.stringify(body) : null,
         };

@@ -17,29 +17,27 @@ const Navbar = ({ onSearch }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [showUnsubscribeModal, setShowUnsubscribeModal] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation(); // Para escuchar cambios de rutas
-    const dropdownRef = useRef(null); // Referencia para el dropdown
+    const location = useLocation(); 
+    const dropdownRef = useRef(null); 
 
-    // Rehidratar el estado del usuario y artista al cargar o cambiar de ruta
     useEffect(() => {
         const savedUser = localStorage.getItem("user");
         const savedArtist = localStorage.getItem("artist");
         setUser(savedUser ? JSON.parse(savedUser) : null);
         setIsArtist(savedArtist ? JSON.parse(savedArtist) : null);
-    }, [location]); // Rehidrata al cambiar de ruta
+    }, [location]);
 
-    // Cerrar el dropdown al hacer clic fuera
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsDropdownVisible(false); // Cierra el menú si el clic es fuera
+                setIsDropdownVisible(false);
             }
         };
 
         document.addEventListener("click", handleOutsideClick);
 
         return () => {
-            document.removeEventListener("click", handleOutsideClick); // Limpia el listener al desmontar
+            document.removeEventListener("click", handleOutsideClick);
         };
     }, []);
 
@@ -55,14 +53,14 @@ const Navbar = ({ onSearch }) => {
 
     const handleLogout = () => {
         console.log("Cerrando sesión...");
-        authController.logout(); // Acción de logout
+        authController.logout();
         localStorage.removeItem("user");
         localStorage.removeItem("artist");
-        localStorage.removeItem("token"); // Asegurarse de eliminar el token si existe
-        setUser(null); // Resetear el estado de usuario
-        setIsArtist(null); // Resetear el estado de artista
+        localStorage.removeItem("token");
+        setUser(null);
+        setIsArtist(null);
         setIsDropdownVisible(false);
-        navigate("/", { replace: true }); // Redirige a inicio reemplazando el historial
+        navigate("/", { replace: true });
     };
 
     const handleUploadSong = () => {
@@ -78,7 +76,7 @@ const Navbar = ({ onSearch }) => {
     };
 
     const handleToggleDropdown = (event) => {
-        event.stopPropagation(); // Prevenir que se cierre inmediatamente al hacer clic dentro
+        event.stopPropagation();
         setIsDropdownVisible((prev) => !prev);
     };
 
@@ -87,7 +85,7 @@ const Navbar = ({ onSearch }) => {
     };
 
     const handleBecomeArtist = () => {
-        navigate("/artists/new"); // Redirige al formulario de registro de artista
+        navigate("/artists/new");
     };
 
     const handleUnsubscribe = () => {
@@ -98,14 +96,14 @@ const Navbar = ({ onSearch }) => {
         if (!isArtist || !isArtist.id) return;
 
         try {
-            await userController.updateUserStatus(user.id, 0); // Actualiza el estado en la base de datos
+            await userController.updateUserStatus(user.id, 0);
             setShowUnsubscribeModal(false);
-            authController.logout(); // Realiza logout después de la baja
+            authController.logout();
             localStorage.removeItem("user");
             localStorage.removeItem("artist");
             setUser(null);
             setIsArtist(null);
-            navigate("/login"); // Redirige a la pantalla de login
+            navigate("/login");
         } catch (error) {
             console.error("Error al solicitar la baja:", error);
             alert("Error al solicitar la baja. Inténtalo nuevamente.");
@@ -142,7 +140,6 @@ const Navbar = ({ onSearch }) => {
                         {user ? (
                             <div className="user-actions">
                                 <li className="username-container">
-                                    {/* Enlace "¿Eres artista?" visible solo si no es artista */}
                                     {!isArtist || isArtist.active === 0 ? (
                                         <a
                                             className="become-artist-link"
@@ -152,15 +149,11 @@ const Navbar = ({ onSearch }) => {
                                             ¿Eres artista?
                                         </a>
                                     ) : null}
-
-                                    {/* Botón "Subir Canción" visible solo si es un artista activo */}
                                     {isArtist && isArtist.active === 1 && (
                                         <button className="upload-song-button" onClick={handleUploadSong}>
                                             Subir 🚀
                                         </button>
                                     )}
-
-                                    {/* Nombre del usuario */}
                                     <span
                                         className="username-display"
                                         onClick={handleToggleDropdown}
@@ -168,8 +161,6 @@ const Navbar = ({ onSearch }) => {
                                     >
                                         {user.username}
                                     </span>
-
-                                    {/* Dropdown con opciones */}
                                     {isDropdownVisible && (
                                         <div className="dropdown-menu" ref={dropdownRef}>
                                             <ul>
@@ -201,7 +192,6 @@ const Navbar = ({ onSearch }) => {
                 </div>
             </nav>
 
-            {/* Modal de confirmación de baja */}
             {showUnsubscribeModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">

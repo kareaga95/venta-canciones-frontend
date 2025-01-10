@@ -101,15 +101,13 @@ h2 {
   cursor: not-allowed;
 }
 
-
-/* Estilo del modal */
 .modal-overlay-delete-confirm {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,7 +142,7 @@ h2 {
   font-size: 1rem;
   color: #fff;
   transition: background-color 0.3s;
-  margin: 0 10px; /* Separación horizontal entre los botones */
+  margin: 0 10px;
 }
 
 .cancel-button {

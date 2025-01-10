@@ -19,22 +19,21 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchSongs(); // Cargar todas las canciones al inicio
+    fetchSongs();
   }, []);
 
   const handleSearch = (searchValue) => {
-    fetchSongs({ search: searchValue }); // Filtrar canciones al buscar
+    fetchSongs({ search: searchValue });
   };
 
   const handleClick = (song) => {
     console.log("Canción seleccionada:", song);
     navigate(`/songs/${song.id}`);
-    // Aquí puedes usar el objeto song para lo que necesites (navegación, detalles, etc.)
   };
 
   return (
     <div>
-      <Navbar onSearch={handleSearch} /> {/* Pasar función de búsqueda */}
+      <Navbar onSearch={handleSearch} />
       <div className="home-page-container">
         <h1 className="home-page-title">Nuevos Lanzamientos</h1>
         <div className="songs-grid-container">
@@ -43,7 +42,7 @@ const Home = () => {
               className="song-card-item"
               key={song.id}
               onClick={() => handleClick(song)}
-              style={{ cursor: "pointer" }} // Pasar el objeto completo al hacer clic
+              style={{ cursor: "pointer" }}
             >
               <img
                 src={`${localhost}${song.cover_image}`}

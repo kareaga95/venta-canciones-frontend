@@ -1,41 +1,37 @@
-/* Contenedor principal de la página Home */
 .home-page-container {
   background-color: #1a1a1a;
   color: #fff;
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 50px; /* Asegurar espacio para el navbar si está fijo */
+  margin-top: 50px;
   font-family: Arial, sans-serif;
 }
 
-/* Título de la sección Home */
 .home-page-title {
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
 }
 
-/* Grid para las tarjetas de canciones en la Home */
 .songs-grid-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 5 columnas fijas */
-  gap: 30px; /* Espaciado entre tarjetas */
-  justify-content: center; /* Centrar las tarjetas */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 30px;
+  justify-content: center;
   padding: 20px;
-  max-width: 1200px; /* Limitar el ancho máximo del grid */
-  margin: 0 auto; /* Centrar el grid horizontalmente */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Estilo para cada tarjeta de canción */
 .song-card-item {
   background-color: #282828;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
-  width: 200px; /* Ancho fijo para las tarjetas */
-  height: 300px; /* Alto fijo para las tarjetas */
+  width: 200px;
+  height: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -44,18 +40,16 @@
   transform: scale(1.05);
 }
 
-/* Imagen de la canción dentro de la tarjeta */
 .song-card-image {
   width: 100%;
-  height: 60%; /* La imagen ocupa el 60% del alto total */
-  object-fit: cover; /* Asegura que la imagen mantenga proporciones */
+  height: 60%;
+  object-fit: cover;
 }
 
-/* Contenedor de la información de la canción */
 .song-card-info {
   padding: 10px;
   text-align: center;
-  flex-grow: 1; /* Asegura que la información ocupe el espacio restante */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,7 +57,7 @@
 }
 
 .song-card-title {
-  font-size: 1.1rem !important; /* Reduce el tamaño del título */
+  font-size: 1.1rem !important;
   font-weight: bold;
   margin: 5px 0;
   color: #fff;

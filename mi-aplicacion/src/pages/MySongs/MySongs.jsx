@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import songController from "../../utils/api/songController"; // Importa el controlador de canciones
+import songController from "../../utils/api/songController";
 import { useNavigate } from "react-router-dom";
-import artistController from "../../utils/api/artistController"; // Importa el controlador de artistas
-import "./MySongs.css"; // Archivo de estilos
+import artistController from "../../utils/api/artistController";
+import "./MySongs.css";
 
 const MySongs = ({ userId }) => {
-    const [songs, setSongs] = useState([]); // Almacena las canciones del artista
+    const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -22,16 +22,16 @@ const MySongs = ({ userId }) => {
                     throw new Error("No tienes permisos de artista o no eres un artista registrado.");
                 }
                 const artistSongs = await songController.getSongsByArtistId(artist.id);
-                setSongs(artistSongs); // Almacenar las canciones obtenidas
+                setSongs(artistSongs);
             } catch (error) {
                 console.error("Error al obtener las canciones del artista:", error);
                 setError("Error al obtener las canciones.");
             } finally {
-                setLoading(false); // Finalizar la carga
+                setLoading(false);
             }
         };
 
-        fetchSongs(); // Ejecutar la función al montar el componente
+        fetchSongs();
     }, [userId]);
 
     const handleEdit = (song) => {
@@ -43,8 +43,8 @@ const MySongs = ({ userId }) => {
         try {
             await songController.deleteSong(selectedSongId);
             setSongs((prevSongs) => prevSongs.filter((song) => song.id !== selectedSongId)); // Actualiza la lista de canciones
-            setShowConfirmModal(false); // Cierra el modal de confirmación
-            setShowSuccessModal(true); // Abre el modal de éxito
+            setShowConfirmModal(false);
+            setShowSuccessModal(true);
         } catch (error) {
             console.error("Error al eliminar la canción:", error);
             alert("No se pudo eliminar la canción. Intenta de nuevo.");
@@ -68,11 +68,10 @@ const MySongs = ({ userId }) => {
         return <div>{error}</div>;
     }
 
-    // Formatear la fecha a `dd/mm/yyyy`
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses van de 0 a 11
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     };
@@ -113,7 +112,6 @@ const MySongs = ({ userId }) => {
                 )}
             </div>
 
-            {/* Modal de confirmación */}
             {showConfirmModal && (
                 <div className="modal-overlay-delete-confirm">
                     <div className="modal-delete-confirm">
@@ -131,7 +129,6 @@ const MySongs = ({ userId }) => {
                 </div>
             )}
 
-            {/* Modal de éxito */}
             {showSuccessModal && (
                 <div className="modal-overlay-delete-confirm">
                     <div className="modal-delete-confirm">
