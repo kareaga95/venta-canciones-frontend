@@ -1,0 +1,161 @@
+/* General wrapper styling */
+.edit-song-wrapper {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Title styling */
+.edit-song-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+/* Form styling */
+.edit-song-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.edit-song-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-song-label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.edit-song-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #282828;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.edit-song-input:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+/* Button styling */
+.edit-song-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-song-save-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-song-save-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+.edit-song-cancel-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #f44336;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-song-cancel-button:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+/* Modal overlay */
+.edit-song-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Contenedor del contenido del modal */
+.edit-song-modal-content {
+    background-color: #282828;
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+/* Título del modal */
+.edit-song-modal-content h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Botones del modal */
+.edit-song-modal-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+}
+
+.edit-song-modal-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+.edit-song-modal-cancel-button {
+    background-color: #f44336;
+}
+
+.edit-song-modal-cancel-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Mensaje dentro del modal */
+.edit-song-modal-message {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #bbb;
+}
+
+/* Loading and error messages */
+.edit-song-loading,
+.edit-song-error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ff6b6b;
+    margin-top: 1rem;
+}

@@ -137,7 +137,8 @@ export async function createSong(songData) {
  */
 export async function updateSong(songId, songData) {
     try {
-        return await fetchData(`/songs/${songId}`, "PUT", songData);
+        console.log("LLEGA:", songData);
+        return await fetchData(`/songs/${songId}/update`, "PUT", songData);
     } catch (error) {
         console.error("Error al actualizar canción:", error);
         throw error;

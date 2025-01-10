@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import songController from "../../utils/api/songController"; // Importa el controlador de canciones
+import { useNavigate } from "react-router-dom";
 import artistController from "../../utils/api/artistController"; // Importa el controlador de artistas
 import "./MySongs.css"; // Archivo de estilos
 
@@ -11,6 +12,7 @@ const MySongs = ({ userId }) => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [selectedSongId, setSelectedSongId] = useState(null);
     const localhost = "http://localhost:3000/";
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSongs = async () => {
@@ -33,9 +35,9 @@ const MySongs = ({ userId }) => {
     }, [userId]);
 
     const handleEdit = (song) => {
-        console.log("Editar canción con ID:", song.id);
-        // Aquí puedes redirigir a la página de edición o abrir un modal de edición
+        navigate(`/songs/${song.id}/update`);
     };
+
 
     const handleDelete = async () => {
         try {

@@ -10,6 +10,7 @@ import UploadSong from "./pages/Song/UploadSong";
 import Register from "./pages/Register/Register";
 import UserPurchases from "./pages/Purchases/UserPurchases";
 import MySongs from "./pages/MySongs/MySongs";
+import EditSong from "./pages/EditSong/EditSong";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/songs/new" element={<UploadSong user={user} />} />
           <Route path="/purchases/user" element={<UserPurchases userId={user?.id} />} />
           <Route path="/songs/artist" element={<MySongs userId={user?.id}/>} />
+          <Route path="/songs/:songId/update" element={<EditSong />} />
         </Routes>
         <Footer />
       </Router>

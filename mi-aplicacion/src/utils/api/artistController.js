@@ -68,6 +68,7 @@ export async function updateArtist(artistId, name) {
  * Actualiza el estado (activo/inactivo) de un artista
  */
 export async function updateArtistStatus(artistId, active) {
+    console.log("ENTRA BAJA2")
     return await fetchArtist(`/artists/${artistId}/status`, "PATCH", { active });
 }
 
