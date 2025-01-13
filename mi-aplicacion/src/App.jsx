@@ -20,7 +20,7 @@ function App() {
 
   const handleLogin = (userData) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData)); // Guardar el usuario en localStorage
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
       setUser(JSON.parse(savedUser));
     }
   }, []);
-  console.log("User ID:", user?.id); // Asegúrate de que user.id sea correcto
+  console.log("User ID:", user?.id);
   return (
     <div>
       <p>{user && user.username} soy Mikel</p>
